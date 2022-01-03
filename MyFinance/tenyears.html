@@ -172,7 +172,7 @@
             for (let y = 1; y <= year; y++) {
                 for (let i = 1; i < 13; i++) {
 
-                    profit = parseFloat((amount * monthlyRate).toFixed(4));
+                    profit = parseFloat((amount * monthlyRate).toFixed(2));
 
                     amount = (profit + monthlyAddAmount + amount);
                     yearlyProfit += profit;
@@ -185,11 +185,11 @@
                 yearlyProfitTable.innerHTML += `
                 <tr>
                     <th scope="row">${y}</th>
-                    <td>${yearlyStartingAmount.toFixed(4)}</td>
+                    <td>${yearlyStartingAmount.toFixed(2)}</td>
                     <td>${monthlyAddAmount}</td>
-                    <td>${amount.toFixed(4)}</td>
-                    <td>${yearlyProfit.toFixed(4)}</td>
-                    <td>${monthlyProfit.toFixed(4)}</td>
+                    <td>${amount.toFixed(2)}</td>
+                    <td>${yearlyProfit.toFixed(2)}</td>
+                    <td>${monthlyProfit.toFixed(2)}</td>
                 </tr>
                 `;
                 yearlyStartingAmount = amount;
@@ -212,9 +212,9 @@
             const monthlyProfitElement = document.querySelector("#monthlyProfit");
 
             accumulatedAmountElement.innerHTML = `${accumulatedAmount}`;
-            totalAmountElement.innerHTML = `${amount.toFixed(4)}`;
-            totalProfitElement.innerHTML = `${totalProfit.toFixed(4)}`;
-            monthlyProfitElement.innerHTML = `${monthlyProfit.toFixed(4)}`;
+            totalAmountElement.innerHTML = `${amount.toFixed(2)}`;
+            totalProfitElement.innerHTML = `${totalProfit.toFixed(2)}`;
+            monthlyProfitElement.innerHTML = `${monthlyProfit.toFixed(2)}`;
         }
 
     </script>

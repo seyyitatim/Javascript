@@ -132,7 +132,7 @@
             const monthlyProfitTable = document.querySelector("#monthlyProfitTable");
             monthlyProfitTable.innerHTML = '';
 
-            let monthlyRate = (annualRate / 12 / 100).toFixed(4);
+            let monthlyRate = (annualRate / 12 / 100).toFixed(2);
 
             var amount = startingAmount;
             var profit = 0.00;
@@ -143,7 +143,7 @@
 
             for (let i = 1; i < 13; i++) {
 
-                profit = parseFloat((amount * monthlyRate).toFixed(4));
+                profit = parseFloat((amount * monthlyRate).toFixed(2));
 
                 monthlyProfitTable.innerHTML += `
                 <tr>
@@ -165,9 +165,9 @@
             const monthlyProfitElement = document.querySelector("#monthlyProfit");
 
             accumulatedAmountElement.innerHTML = `${accumulatedAmount}`;
-            totalAmountElement.innerHTML = `${amount.toFixed(4)}`;
-            totalProfitElement.innerHTML = `${totalProfit.toFixed(4)}`;
-            monthlyProfitElement.innerHTML = `${monthlyProfit.toFixed(4)}`;
+            totalAmountElement.innerHTML = `${amount.toFixed(2)}`;
+            totalProfitElement.innerHTML = `${totalProfit.toFixed(2)}`;
+            monthlyProfitElement.innerHTML = `${monthlyProfit.toFixed(2)}`;
         }
 
     </script>
