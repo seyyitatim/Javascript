@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link rel="stylesheet" href="style.css">
+    <title>My Task List</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Finans Tablom</h1>
+
+        <a href="tenyears.html" class="btn btn-secondary">Yıllara Göre Hesaplama</a>
+
+        <div class="card  mt-2">
+            <h5 class="card-header">Yıllık Hesap</h5>
+            <div class="card-body">
+                <div>
+                    <div id="input">
+                        <div class="row g-3 align-items-center">
+                            <div class="col-3">
+                                <label for="amount" class="col-form-label">Başlangıç Tutarı</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="number" id="amount" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="input">
+                        <div class="row g-3 align-items-center">
+                            <div class="col-3">
+                                <label for="monthlyAddAmount" class="col-form-label">Aylık Eklenecek Tutar</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="number" id="monthlyAddAmount" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="input">
+                        <div class="row g-3 align-items-center">
+                            <div class="col-3">
+                                <label for="annualRate" class="col-form-label">Yıllık Oran</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="number" id="annualRate" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-outline-success" onclick="Calculate()">Hesapla</button>
+                </div>
+
+                <div class="mt-3">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Ay</th>
+                                <th scope="col">Başlangıç Tutarı</th>
+                                <th scope="col">Elde Edilen Kar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="monthlyProfitTable">
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+        <div class="card mt-3">
+            <h5 class="card-header">Sonuç</h5>
+            <div class="card-body">
+
+                <div id="input">
+                    <div class="row g-3 align-items-center">
+                        <div class="col-3">
+                            <label for="amount" class="col-form-label">Biriktirilen Tutar</label>
+                        </div>
+                        <div class="col-auto">
+                            <p id="accumulatedAmount"></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="input">
+                    <div class="row g-3 align-items-center">
+                        <div class="col-3">
+                            <label for="amount" class="col-form-label">Toplam Tutar</label>
+                        </div>
+                        <div class="col-auto">
+                            <p id="totalAmount"></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="input">
+                    <div class="row g-3 align-items-center">
+                        <div class="col-3">
+                            <label for="amount" class="col-form-label">Kâr</label>
+                        </div>
+                        <div class="col-auto">
+                            <p id="totalProfit"></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="input">
+                    <div class="row g-3 align-items-center">
+                        <div class="col-3">
+                            <label for="amount" class="col-form-label">Aylık Kâr</label>
+                        </div>
+                        <div class="col-auto">
+                            <p id="monthlyProfit"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function Calculate() {
+            const startingAmount = parseFloat(document.querySelector("#amount").value);
+            const monthlyAddAmount = parseFloat(document.querySelector("#monthlyAddAmount").value);
+            const annualRate = parseFloat(document.querySelector("#annualRate").value);
+
+            const monthlyProfitTable = document.querySelector("#monthlyProfitTable");
+            monthlyProfitTable.innerHTML = '';
+
+            let monthlyRate = (annualRate / 12 / 100).toFixed(4);
+
+            var amount = startingAmount;
+            var profit = 0.00;
+
+            var totalProfit = 0.00;
+            var monthlyProfit = 0.00;
+            var accumulatedAmount = startingAmount;
+
+            for (let i = 1; i < 13; i++) {
+
+                profit = parseFloat((amount * monthlyRate).toFixed(4));
+
+                monthlyProfitTable.innerHTML += `
+                <tr>
+                    <th scope="row">${i}</th>
+                    <td>${amount.toFixed(4)}</td>
+                    <td>${profit}</td>
+                </tr>
+            `
+                amount = (profit + monthlyAddAmount + amount);
+                totalProfit += profit;
+                accumulatedAmount += monthlyAddAmount;
+            }
+
+            monthlyProfit = totalProfit / 12;
+
+            const accumulatedAmountElement = document.querySelector("#accumulatedAmount");
+            const totalAmountElement = document.querySelector("#totalAmount");
+            const totalProfitElement = document.querySelector("#totalProfit");
+            const monthlyProfitElement = document.querySelector("#monthlyProfit");
+
+            accumulatedAmountElement.innerHTML = `${accumulatedAmount}`;
+            totalAmountElement.innerHTML = `${amount.toFixed(4)}`;
+            totalProfitElement.innerHTML = `${totalProfit.toFixed(4)}`;
+            monthlyProfitElement.innerHTML = `${monthlyProfit.toFixed(4)}`;
+        }
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
