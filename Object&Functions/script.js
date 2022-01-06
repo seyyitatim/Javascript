@@ -298,3 +298,120 @@
 // checkNumber = num.checkNumericRange.bind(num1);
 // console.log(checkNumber(80));
 // console.log(checkNumber(50));
+
+
+//------------------------------------------------------------------------------------------
+
+// Rest Parameters
+
+// function sum(...arr) {
+//     let result = 0;
+//     arr.forEach(item => result += item);
+//     return result;
+// }
+
+// console.log(sum(10,20,30));
+
+// Destructuring
+// var a, b, rest;
+
+// [a, b] = [10, 20];
+// console.log(a);
+// console.log(b);
+
+// [a, b, ...rest] = [10, 20, 30, 40, 50, 60];
+// console.log(a);
+// console.log(b);
+// console.log(rest);
+
+// ({ a, b } = { a: 10, b: 20 });
+// console.log(a);
+// console.log(b);
+
+// ({ a, b, ...rest } = { a: 10, b: 20, c: 30, d: 40 });
+// console.log(a);
+// console.log(b);
+// console.log(rest);
+
+// // Array destructuring
+// const arrConfig = ["localhost", "8080", "900"];
+
+// const [server, port, timeout] = arrConfig;
+// console.log(server, port, timeout);
+
+// Object destructuring 
+
+// const objConfig = {
+//     server: "localhost",
+//     port: "8080",
+//     timeout: 900
+// }
+
+// const { server, port, timeout } = objConfig;
+// console.log(server, port, timeout);
+
+// let { timeout: t } = objConfig;
+// console.log(t);
+
+// const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+
+// const [, , wed, , fri] = days;
+
+// console.log(wed, fri)
+
+
+//------------------------------------------------------------------------------------------
+
+// Array
+
+// const products = [
+//     { name: "samsung s8", price: 3000 },
+//     { name: "samsung s7", price: 2000 },
+//     { name: "samsung s6", price: 1000 }
+// ]
+
+// console.log(Array.from(products, prd => prd.name == "samsung s8"));
+// console.log(Array.from(products, prd => prd.price));
+// console.log(products.find(prd => prd.name == "samsung s7"));
+// console.log(products.filter(prd => prd.name == "samsung s6"));
+// console.log(products.findIndex(prd => prd.name == "samsung s6"));
+// console.log(products.findIndex(prd => prd.price > 1000));
+
+
+//------------------------------------------------------------------------------------------
+
+// Class ES6
+
+// class Person {
+//     constructor(name, job, yearOfBirth) {
+//         this.name = name;
+//         this.job = job;
+//         this.yearOfBirth = yearOfBirth;
+//     }
+
+//     calculateAge() {
+//         return new Date().getFullYear() - this.yearOfBirth;
+//     }
+// }
+
+// let halil = new Person("halil", "software developer", 1995);
+// console.log(halil.calculateAge());
+
+// class Point {
+//     constructor(x, y) {
+//         this.x = x;
+//         this.y = y;
+//     }
+
+//     static distance(a, b) {
+//         const dx = a.x - b.x;
+//         const dy = a.y - b.y;
+
+//         return Math.hypot(dx, dy);
+//     }
+// }
+
+// const d1 = new Point(10,10);
+// const d2 = new Point(20,20);
+
+// console.log(Point.distance(d1,d2));
