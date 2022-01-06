@@ -119,3 +119,162 @@
 // console.log(emel)
 // console.log(emel.calculateAge())
 
+//------------------------------------------------------------------------------------------
+
+// // callback function
+
+// var val1, val2;
+
+// function MultipleByTwo(a, b, c, callback) {
+//     var arr = [];
+//     if (callback && typeof callback === "function") {
+//         for (let i = 0; i < 3; i++) {
+//             arr[i] = callback(arguments[i] * 2);
+//         }
+//     } else {
+//         for (let i = 0; i < 3; i++) {
+//             arr[i] = arguments[i] * 2;
+//         }
+//     }
+//     return arr;
+// }
+
+// function addOne(a) {
+//     return a + 1;
+// }
+
+// val1 = MultipleByTwo(10, 20, 30, addOne);
+// val2 = MultipleByTwo(10, 20, 30);
+
+// console.log(val1);
+// console.log(val2);
+
+//------------------------------------------------------------------------------------------
+
+// // Immediate Functions
+
+// // Bir fonskiyonun sadece site yüklendiğin de bir kez çalışmasını istediğimizde kullabiliriz.
+// // 2 farklı kullanımı mevcut
+
+// // (function(){})()
+
+// // (function(){}())
+
+// (function () {
+//     var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+//     var today = new Date();
+//     var msg = `Welcome. Today is ${days[today.getDay()]}`;
+
+//     console.log(msg);
+// }())
+
+
+//     (function (name) {
+//         var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+//         var today = new Date();
+//         var msg = `Welcome ${name}. Today is ${days[today.getDay()]}`;
+
+//         console.log(msg);
+//     })("Seyyit");
+
+//------------------------------------------------------------------------------------------
+
+// Getter & Setter
+// var person = {
+//     name: "Seyyit",
+//     surname: "Atım",
+
+//     getFullName: function () {
+//         return `${this.name} ${this.surname}`;
+//     },
+
+//     setFullName: function (value) {
+//         var parts = value.split(" ");
+//         this.name = parts[0];
+//         this.surname = parts[1];
+//     }
+// }
+
+// person.setFullName("ali veli")
+// console.log(person.getFullName());
+// console.log(person);
+
+// var person = {
+//     name: "Seyyit",
+//     surname: "Atım",
+
+//     get fullName() {
+//         return `${this.name} ${this.surname}`;
+//     },
+
+//     set fullName(value) {
+//         var parts = value.split(" ");
+//         this.name = parts[0];
+//         this.surname = parts[1];
+//     }
+// }
+// person.fullName = "Ali Veli";
+// console.log(person.fullName);
+// console.log(person);
+
+
+//------------------------------------------------------------------------------------------
+
+// Call, Apply & Bind
+
+// var welcome = function () {
+//     console.log("Welcome " + this.name);
+// }
+
+// var welcome = function (a, b) {
+//     console.log("Welcome " + this.name + ". Are you interested in " + a + " and " + b);
+// }
+
+// var yigit = { name: "yiğit" };
+// var emel = { name: "emel" }
+
+// without parameters
+
+// welcome.call(yigit);
+
+// welcome.apply(emel);
+
+// welcomeYigit = welcome.bind(yigit);
+// welcomeYigit();
+
+// welcome.call(yigit, "asp.net", "angular");
+
+// welcome.apply(emel,["java","react"]);
+
+// welcomeYigit = welcome.bind(yigit);
+// welcomeYigit("python","vue");
+
+//Example
+
+// var num = {
+//     min: 0,
+//     max: 100,
+//     checkNumericRange: function (value) {
+//         if (typeof value !== "number") {
+//             return false;
+//         } else {
+//             return value >= this.min && value <= this.max;
+//         }
+//     }
+// }
+
+// console.log(num.checkNumericRange(60));
+// console.log(num.checkNumericRange(120));
+
+
+// var num1 = {
+//     min: 30,
+//     max: 75
+// }
+
+// console.log(num.checkNumericRange.call(num1,40));
+// console.log(num.checkNumericRange.apply(num1,[90]));
+
+// checkNumber = num.checkNumericRange.bind(num1);
+// console.log(checkNumber(80));
+// console.log(checkNumber(50));
