@@ -1,3 +1,23 @@
+// // Array
+
+// const data = [
+//     { name: "IPhone 8", price: 3000 },
+//     { name: "IPhone 7", price: 2500 },
+//     { name: "IPhone 6", price: 2000 },
+//     { name: "IPhone 5", price: 1500 }
+// ]
+// let phones = data.map(function(phone){
+//     return phone;
+// });
+// let prices = data.map(function(phone){
+//     return phone.price;
+// })
+// console.log(phones);
+// console.log(prices);
+
+//------------------------------------------------------------------------------------------
+
+
 // // Object Literals
 
 // // ES5'te class yok ama bu şekilde tanımlayarak class gibi kullanabiliriz.
