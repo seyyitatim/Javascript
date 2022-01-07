@@ -415,3 +415,65 @@
 // const d2 = new Point(20,20);
 
 // console.log(Point.distance(d1,d2));
+
+//------------------------------------------------------------------------------------------
+
+// // Sub Classes
+
+// //ES5
+// function PersonES5(firstName, lastName) {
+//     this.firstName = firstName;
+//     this.lastName = lastName;
+// }
+
+// PersonES5.prototype.sayHi = function () {
+//     return `Hello I'm ${this.firstName} ${this.lastName}`;
+// }
+
+// function CustomerES5(firstName, lastName, phone, userName) {
+//     PersonES5.call(this, firstName, lastName);
+//     this.phone = phone;
+//     this.userName = userName;
+// }
+
+// CustomerES5.prototype = Object.create(PersonES5.prototype);
+
+// var customer = new CustomerES5("seyyit", "atım", "1234567", "seyyitatim");
+
+// console.log(customer.sayHi());
+
+// // ES6
+
+// class PersonES6 {
+//     constructor(firstname, lastName) {
+//         this.firstName = firstname;
+//         this.lastName = lastName;
+//     }
+//     sayHi() {
+//         return `Hello I'm ${this.firstName} ${this.lastName}`;
+//     }
+// }
+
+
+
+// class CustomerES6 extends PersonES6 {
+//     constructor(firstName, lastName, phone, userName) {
+//         super(firstName, lastName);
+//         this.phone = phone;
+//         this.userName = userName;
+//     }
+
+//     static getTotal() {
+//         return 1000;
+//     }
+
+//     getFullName() {
+//         return this.firstName + " " + this.lastName;
+//     }
+// }
+
+// var customer = new CustomerES6("Seyyit", "Atım", "654321", "seyyitatim");
+
+// console.log(customer.sayHi());
+// console.log(customer.getFullName());
+// console.log(CustomerES6.getTotal());
