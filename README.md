@@ -1,3 +1,3 @@
 # Javascript
 
-Javascript öğrenirken geliştirdiğim uygulamalar
+Javascript öğrenirken geliştirdiğim uygulamalar ve notlar
