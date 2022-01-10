@@ -90,3 +90,202 @@
 
 //     xhr.send();
 // }
+
+//------------------------------------------------------------------------------------------
+
+// Asynchronous Programming with callback
+
+// var products = [
+//     { id: 1, name: "samsung S8", price: 3000 },
+//     { id: 2, name: "samsung S7", price: 2000 },
+//     { id: 3, name: "samsung S6", price: 1000 }
+// ]
+
+// function addProduct(prd, callback) {
+//     setTimeout(() => {
+//         products.push(prd);
+//         callback();
+//     }, 2000);
+// }
+
+// function getProducts() {
+//     setTimeout(() => {
+//         products.forEach(p => {
+//             console.log(p.name);
+//         })
+//     }, 1000)
+// }
+
+// addProduct({ id: 4, name: "samsung S5", price: 500 }, getProducts);
+
+//--------
+
+// var products = [
+//     { id: 1, name: "samsung S8", price: 3000 },
+//     { id: 2, name: "samsung S7", price: 2000 },
+//     { id: 3, name: "samsung S6", price: 1000 }
+// ]
+
+// let added = false;
+
+// function addProduct(prd, callback) {
+//     if (added) {
+//         setTimeout(() => {
+//             products.push(prd);
+//             callback(null, prd);
+//         }, 2000);
+//     } else {
+//         callback("500", prd)
+//     }
+// }
+
+// function getProducts() {
+//     setTimeout(() => {
+//         products.forEach(p => {
+//             console.log(p.name);
+//         })
+//     }, 1000)
+// }
+
+// addProduct({ id: 4, name: "samsung S5", price: 500 }, function (err, data) {
+//     if (err) {
+//         console.log("Hata: " + err);
+//     } else {
+//         console.log(data);
+//     }
+// });
+
+//------------------------------------------------------------------------------------------
+
+// Promise
+
+// var products = [
+//     { id: 1, name: "samsung S8", price: 3000 },
+//     { id: 2, name: "samsung S7", price: 2000 },
+//     { id: 3, name: "samsung S6", price: 1000 }
+// ]
+
+// function addProduct(prd) {
+
+//     return new Promise(function (resolve, reject) {
+//         setTimeout(() => {
+//             products.push(prd);
+//             let added = true;
+//             if (added) {
+//                 resolve();
+//             } else {
+//                 reject("Hata: 400");
+//             }
+//         }, 2000);
+//     });
+// }
+
+// function getProducts() {
+//     setTimeout(() => {
+//         products.forEach(p => {
+//             console.log(p.name);
+//         })
+//     }, 1000)
+// }
+
+// addProduct({ id: 4, name: "samsung S5", price: 500 })
+//     .then(getProducts)
+//     .catch(err => {
+//         console.log(err);
+//     })
+
+//---------------------------------------------------------------------------------------
+
+//Promise Example
+
+// new Promise(function (resolve, reject) {
+
+//     let added = true;
+//     setTimeout(function () {
+//         if (added) {
+//             resolve(5);
+//         } else {
+//             reject("hata");
+//         }
+//     })
+// }).then(function (value) {
+//     console.log(value);
+//     return value * value;
+// }).then(function (value) {
+//     console.log(value);
+//     return value * value;
+// });
+
+//---------------------------------------------------------------------------------------
+
+// Fetch Api
+
+// Text
+// function getText(){
+//     fetch("msg.txt")
+//     .then(response =>{
+//         return response.text();
+//     }).then(data=>{
+//         console.log(data);
+//     }).catch(error=>{
+//         console.log(error);
+//     })
+// }
+
+// getText();
+
+// Json
+// function getJson(){
+//     fetch("employees.json")
+//     .then(response =>{
+//         return response.json();
+//     }).then(data=>{
+//         console.log(data);
+//     }).catch(error=>{
+//         console.log(error);
+//     })
+// }
+
+// getJson();
+
+// External Api
+// function getExternalApi() {
+//     fetch("https://randomuser.me/api/")
+//         .then(response => {
+//             return response.json();
+//         }).then(data => {
+//             console.log(data.results);
+//         }).catch(error => {
+//             console.log(error);
+//         })
+// }
+
+// getExternalApi();
+
+// function postExternalApi() {
+
+//     var url = "https://jsonplaceholder.typicode.com/posts";
+
+//     var data = {
+//         method: "POST",
+//         body: JSON.stringify({
+//             userId: 1,
+//             title: "sample title",
+//             body: "sample body"
+//         }),
+//         headers: new Headers({
+//             "content-type": "application/json"
+//         })
+//     };
+
+//     fetch(url, data)
+//         .then(res => {
+//             console.log(res);
+//         });
+// }
+
+// postExternalApi();
+
+let merhaba = "asd"
+
+`${console.log(merhaba)}`
