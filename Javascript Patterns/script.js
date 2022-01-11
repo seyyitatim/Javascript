@@ -118,28 +118,138 @@
 
 // Singleton Pattern
 
-var Singleton = (function(){
+// var Singleton = (function(){
 
-    var instance;
+//     var instance;
 
-    const createInstance = function(){
-        return {
-            randomNumber : Math.random()
+//     const createInstance = function(){
+//         return {
+//             randomNumber : Math.random()
+//         }
+//     }
+
+//     return {
+//         getInstance : function(){
+//             if(instance == null){
+//                 instance = createInstance();
+//             }
+//             return instance;
+//         }
+//     }
+// })();
+
+// const instance1 = Singleton.getInstance();
+// const instance2 = Singleton.getInstance();
+
+// console.log(instance1);
+// console.log(instance2);
+
+
+// var singleton = (function () {
+
+//     var instance;
+
+//     var ProductController = function () {
+
+//         let cars = [
+//             { name: "bmw", price: 5000 },
+//             { name: "mercedes", price: 7000 },
+//             { name: "opel", price: 4000 }
+//         ];
+
+//         const add = function (car) {
+//             cars.push(car);
+//         }
+
+//         const get = function () {
+//             return cars;
+//         }
+
+//         return {
+//             add, get
+//         };
+//     }
+
+//     return {
+//         getInstance: function () {
+//             if (!instance) {
+//                 instance = new ProductController();
+//             }
+//             return instance;
+//         }
+//     };
+// })();
+
+// var instance1 = singleton.getInstance();
+// var instance2 = singleton.getInstance();
+
+// instance1.add({ name: "ford", price: 6000 });
+// console.log(instance2.get());
+
+//------------------------------------------------------------------------------------------
+
+// Factory Pattern
+
+function Factory(){
+
+    this.createEmployee = function(type){
+
+        var employee;
+
+        if(type==='fulltime'){
+            employee = new FullTime();    
+        }else if(type==='parttime'){
+            employee = new PartTime();
+        } else if(type==='temporary'){
+            employee = new Temporary();
         }
-    }
-
-    return {
-        getInstance : function(){
-            if(instance == null){
-                instance = createInstance();
-            }
-            return instance;
+        employee.type = type;
+        employee.say = function(){
+            console.log(this.type + ' : saatlik ücreti : '+ this.hourly);
         }
+        return employee;
     }
-})();
+}
 
-const instance1 = Singleton.getInstance();
-const instance2 = Singleton.getInstance();
+class FullTime{
+    constructor() {
+        this.hourly = "30TL";
+    }
+}
+class PartTime{
+    constructor() {
+        this.hourly = "20TL";
+    }
+}
+class Temporary{
+    constructor() {
+        this.hourly = "15TL";
+    }
+}
+// var FullTime = function(){
+//     this.hourly = '30TL';
+// }
 
-console.log(instance1);
-console.log(instance2);
+// var PartTime = function(){
+//     this.hourly = '20TL';
+// }
+
+// var Temporary = function(){
+//     this.hourly = '15TL';
+// }
+
+var factory = new Factory();
+
+var employees = [];
+
+employees.push(factory.createEmployee('fulltime'));
+employees.push(factory.createEmployee('parttime'));
+employees.push(factory.createEmployee('parttime'));
+employees.push(factory.createEmployee('temporary'));
+employees.push(factory.createEmployee('temporary'));
+employees.push(factory.createEmployee('fulltime'));
+
+employees.forEach(function(emp){
+    emp.say();
+})
+
