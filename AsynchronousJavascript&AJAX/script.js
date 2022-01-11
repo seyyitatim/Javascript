@@ -286,6 +286,77 @@
 
 // postExternalApi();
 
-let merhaba = "asd"
+//---------------------------------------------------------------------------------------
 
-`${console.log(merhaba)}`
+// Async & Await 
+
+// async function fn() {
+//     return "hello";
+// }
+
+// console.log(fn());
+
+// fn()
+//     .then(res => console.log(res));
+
+//-------
+
+// async function getCategory(){
+//     return "phone";
+// }
+
+// async function getProduct(category){
+//     return `5 products in ${category}`;
+// }
+
+// async function main(){
+//     var category = await getCategory();
+//     var result = await getProduct(category);
+
+//     console.log(result);
+// }
+
+// main();
+
+//-------
+
+// var isError = true;
+
+// function getCategory(){
+//    return new Promise((resolve,reject)=>{
+//        setTimeout(() => {
+//            if(!isError){
+//                resolve('phone');
+//            }else{
+//                reject('error')
+//            }          
+//        }, 1000);
+//    }); 
+// }
+
+// function getProducts(category){
+//    return new Promise(resolve=>{
+//        setTimeout(()=>{
+//            resolve(`5 products in ${category}`);
+//        },1000)
+//    });
+// }
+
+// getCategory()
+//    .then(getProducts)
+//    .then(res => console.log(res))
+//    .catch(err=>console.log(err));
+
+// async function getProduct(){
+
+//    try{
+//        let category= await getCategory();
+//        let result = await getProducts(category);        
+//        console.log(result);
+//    }
+//    catch(error){
+//        console.log(error);
+//    }  
+// }
+
+// getProduct();
