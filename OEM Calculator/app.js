@@ -6,7 +6,6 @@ const StorageController = (function () {
 // Product Controller
 const ProductController = (function () {
 
-    // private
     const Product = function (id, name, price) {
         this.id = id;
         this.name = name;
@@ -20,7 +19,7 @@ const ProductController = (function () {
     }
 
     // public
-    getProduct = function () {
+    getProducts = function () {
         return data.products;
     }
 
@@ -40,11 +39,10 @@ const ProductController = (function () {
         var newProduct = new Product(id, productName, parseFloat(productPrice));
 
         data.products.push(newProduct);
-
         return newProduct;
     }
     return {
-        getProduct,
+        getProducts,
         getData,
         addProduct
     }
@@ -58,15 +56,20 @@ const UIController = (function () {
         addButton: ".addBtn",
         productName: "#productName",
         productPrice: "#productPrice",
-        productCard:"#productCard"
+        productCard: "#productCard",
+        totalTl: "#total-tl",
+        totalDollar: "#total-dollar"
     }
 
     //private
-    showProduct = function (products) {
-        var html = "";
 
-        products.forEach(product => {
-            html += `
+    clearTable = function () {
+        document.getElementById(Selectors.productList).innerHTML = "";
+    }
+
+    addProductToTable = function (product) {
+        showCard();
+        var html = `
             <tr>
                 <td>${product.id}</td>
                 <td>${product.name}</td>
@@ -77,13 +80,15 @@ const UIController = (function () {
                     </button>
                 </td>
             </tr>`
-        });
 
-        document.getElementById(Selectors.productList).innerHTML = html;
+        document.getElementById(Selectors.productList).innerHTML += html;
     }
     //public
-    createProductList = function (products) {
-        showProduct(products);
+    addProductsList = function (products) {
+        clearTable();
+        products.forEach(product => {
+            addProductToTable(product);
+        });
     }
 
     getSelectors = function () {
@@ -91,30 +96,28 @@ const UIController = (function () {
     }
 
     addProduct = function (product) {
-        var html = `
-        <tr>
-            <td>${product.id}</td>
-            <td>${product.name}</td>
-            <td>${product.price} $</td>
-            <td class="text-right">
-                <button type="submit" class="btn btn-warning btn-sm">
-                    <i class="fa fa-edit"></i>
-                </button>
-            </td>
-        </tr>`
-
-        document.getElementById(Selectors.productList).innerHTML += html;
+        addProductToTable(product);
     }
 
-    clearInputs = function(){
+    clearInputs = function () {
         document.querySelector(Selectors.productName).value = "";
         document.querySelector(Selectors.productPrice).value = "";
     }
+
+    hideCard = function () {
+        document.querySelector(Selectors.productCard).style.display = "none";
+    }
+
+    showCard = function () {
+        document.querySelector(Selectors.productCard).style.display = "block";
+    }
     return {
-        createProductList,
+        addProductsList,
         getSelectors,
         addProduct,
-        clearInputs
+        clearInputs,
+        hideCard,
+        showCard
     }
 })();
 
@@ -125,7 +128,6 @@ const App = (function (ProductCtrl, UICtrl) {
 
     // Load Event Listeners
     const loadEventListeners = function () {
-
         // add product event
         document.querySelector(UISelectors.addButton).addEventListener("click", productAddSubmit);
     }
@@ -148,20 +150,21 @@ const App = (function (ProductCtrl, UICtrl) {
         e.preventDefault();
     }
 
-
-
     init = function () {
         console.log("starting app...");
-        let products = ProductCtrl.getProduct();
-
-        UICtrl.createProductList(products);
+        let products = ProductCtrl.getProducts();
 
         // load event listeners
         loadEventListeners();
+
+        if (products.length == 0) {
+            UICtrl.hideCard();
+        } else {
+            UICtrl.addProductsList(products);
+        }
     }
     return {
-        init,
-        productAddSubmit
+        init
     }
 
 })(ProductController, UIController);
