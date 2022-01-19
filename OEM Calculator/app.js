@@ -41,10 +41,22 @@ const ProductController = (function () {
         data.products.push(newProduct);
         return newProduct;
     }
+
+    getTotal = function () {
+        let total = 0;
+
+        data.products.forEach(product => {
+            total += product.price;
+        });
+
+        data.totalPrice = total;
+        return data.totalPrice;
+    }
     return {
         getProducts,
         getData,
-        addProduct
+        addProduct,
+        getTotal
     }
 })();
 
@@ -111,13 +123,19 @@ const UIController = (function () {
     showCard = function () {
         document.querySelector(Selectors.productCard).style.display = "block";
     }
+
+    showTotal = function (total) {
+        document.querySelector(Selectors.totalDollar).innerText = total;
+        document.querySelector(Selectors.totalTl).innerText = total * 4.5;
+    }
     return {
         addProductsList,
         getSelectors,
         addProduct,
         clearInputs,
         hideCard,
-        showCard
+        showCard,
+        showTotal
     }
 })();
 
@@ -143,6 +161,12 @@ const App = (function (ProductCtrl, UICtrl) {
             // add item to list
             UICtrl.addProduct(newProduct);
 
+            // get total
+            const total = ProductCtrl.getTotal();
+
+            // show total
+            UICtrl.showTotal(total);
+
             // clear inputs
             UICtrl.clearInputs();
         }
@@ -159,6 +183,8 @@ const App = (function (ProductCtrl, UICtrl) {
 
         if (products.length == 0) {
             UICtrl.hideCard();
+
+            UICtrl.showTotal(0);
         } else {
             UICtrl.addProductsList(products);
         }
