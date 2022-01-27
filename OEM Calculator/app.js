@@ -22,9 +22,38 @@ const StorageController = (function () {
         }
         return products;
     }
+
+    updateProduct = function (product) {
+
+        let products = JSON.parse(localStorage.getItem("products"));
+
+        products.forEach((prd, index) => {
+            if (product.id == prd.id) {
+                products.splice(index, 1, product);
+            }
+        })
+
+        localStorage.setItem("products", JSON.stringify(products));
+    }
+
+    deleteProduct = function (id) {
+
+        let products = JSON.parse(localStorage.getItem("products"));
+
+        products.forEach((prd, index) => {
+            if (id == prd.id) {
+                products.splice(index, 1);
+            }
+        })
+
+        localStorage.setItem("products", JSON.stringify(products));
+    }
+
     return {
         storeProduct,
-        getProducts
+        getProducts,
+        updateProduct,
+        deleteProduct
     }
 })();
 
@@ -375,6 +404,9 @@ const App = (function (ProductCtrl, UICtrl, StorageCtrl) {
             // show total
             UICtrl.showTotal(total);
 
+            // update storage
+            StorageCtrl.updateProduct(updateProduct);
+
             UICtrl.clearInputs();
 
             UICtrl.addState(item);
@@ -402,12 +434,16 @@ const App = (function (ProductCtrl, UICtrl, StorageCtrl) {
 
         // UI delete product
         UICtrl.deleteProduct(selectedProduct);
+        
+        // delete from storage
+        StorageCtrl.deleteProduct(selectedProduct.id);
 
         // get total
         const total = ProductCtrl.getTotal();
 
         // show total
         UICtrl.showTotal(total);
+
 
         UICtrl.clearInputs();
 
