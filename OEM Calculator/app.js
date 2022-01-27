@@ -1,6 +1,31 @@
 // Storage Controller
 const StorageController = (function () {
 
+    storeProduct = function (product) {
+        let products;
+        if (localStorage.getItem("products") === null) {
+            products = [];
+            products.push(product);
+        } else {
+            products = JSON.parse(localStorage.getItem("products"));
+            products.push(product);
+        }
+        localStorage.setItem("products", JSON.stringify(products));
+    }
+
+    getProducts = function () {
+        let products;
+        if (localStorage.getItem("products") === null) {
+            products = [];
+        } else {
+            products = JSON.parse(localStorage.getItem("products"));
+        }
+        return products;
+    }
+    return {
+        storeProduct,
+        getProducts
+    }
 })();
 
 // Product Controller
@@ -13,7 +38,7 @@ const ProductController = (function () {
     }
 
     const data = {
-        products: [],
+        products: StorageController.getProducts(),
         selectedProduct: null,
         totalPrice: 0
     }
@@ -126,7 +151,7 @@ const UIController = (function (ProductCtrl) {
     //private
 
     clearTable = function () {
-        document.getElementById(Selectors.productList).innerHTML = "";
+        document.querySelector(Selectors.productList).innerHTML = "";
     }
 
     addProductToTable = function (product) {
@@ -264,7 +289,7 @@ const UIController = (function (ProductCtrl) {
 })(ProductController);
 
 // App Controller
-const App = (function (ProductCtrl, UICtrl) {
+const App = (function (ProductCtrl, UICtrl, StorageCtrl) {
 
     const UISelectors = UICtrl.getSelectors();
 
@@ -297,6 +322,9 @@ const App = (function (ProductCtrl, UICtrl) {
 
             // add item to list
             UICtrl.addProduct(newProduct);
+
+            // add product to LS
+            StorageCtrl.storeProduct(newProduct);
 
             // get total
             const total = ProductCtrl.getTotal();
@@ -398,7 +426,7 @@ const App = (function (ProductCtrl, UICtrl) {
 
         UICtrl.addState();
 
-        let products = ProductCtrl.getProducts();
+        let products = StorageCtrl.getProducts();
 
         // load event listeners
         loadEventListeners();
@@ -415,6 +443,6 @@ const App = (function (ProductCtrl, UICtrl) {
         init
     }
 
-})(ProductController, UIController);
+})(ProductController, UIController, StorageController);
 
 App.init();
