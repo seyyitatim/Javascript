@@ -54,6 +54,16 @@
                             </div>
                         </div>
                     </div>
+                    <div id="input">
+                        <div class="row g-3 align-items-center">
+                            <div class="col-3">
+                                <label for="taxRate" class="col-form-label">Vergi Oran</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="number" id="taxRate" class="form-control">
+                            </div>
+                        </div>
+                    </div>
 
                     <button type="button" class="btn btn-outline-success" onclick="Calculate()">Hesapla</button>
                 </div>
@@ -128,11 +138,15 @@
             const startingAmount = parseFloat(document.querySelector("#amount").value);
             const monthlyAddAmount = parseFloat(document.querySelector("#monthlyAddAmount").value);
             const annualRate = parseFloat(document.querySelector("#annualRate").value);
+            const taxRate = parseFloat(document.querySelector("#taxRate").value);
 
             const monthlyProfitTable = document.querySelector("#monthlyProfitTable");
             monthlyProfitTable.innerHTML = '';
 
             let monthlyRate = (annualRate / 12 / 100).toFixed(2);
+            let taxPer = taxRate / 100;
+
+            console.log(taxPer);
 
             var amount = startingAmount;
             var profit = 0.00;
@@ -144,16 +158,20 @@
             for (let i = 1; i < 13; i++) {
 
                 profit = parseFloat((amount * monthlyRate).toFixed(2));
+                
+                var tax = profit * taxPer;
+                
+                var net = profit - tax;
 
                 monthlyProfitTable.innerHTML += `
                 <tr>
                     <th scope="row">${i}</th>
                     <td>${amount.toFixed(4)}</td>
-                    <td>${profit}</td>
+                    <td>${net}</td>
                 </tr>
             `
-                amount = (profit + monthlyAddAmount + amount);
-                totalProfit += profit;
+                amount = (net + monthlyAddAmount + amount);
+                totalProfit += net;
                 accumulatedAmount += monthlyAddAmount;
             }
 
